@@ -4,7 +4,6 @@
 ; Created:   周五 1月 12 2024
 ; Processor: 8086
 ; Compiler:  MASM32
-; Author: 自动化1班 3121000823 陈健锋
 ;
 ; Before starting simulation set Internal Memory Size 
 ; in the 8086 model properties to 0x10000
