@@ -40,7 +40,6 @@ DATA SEGMENT
     DAT2 DB 0 
     DAT3 DB 1
     DAT4 DB 0
-	;OE DB 1   ; 判断奇数次还是偶数次按下按钮，这个已经用不到了
 	FT DB 1   ; 判断是否首次按下暂停
 DATA ENDS
 
@@ -97,7 +96,6 @@ BACK: MOV DX, C_PORT
 	IN AL, DX   ; 将C端口的值输入到AL寄存器
 	TEST AL, 00000010B   ; 测试AL的第1位，即C端口的第1位，是否为1
 	JZ B2   ; 如果为1，跳转到B2标签，表示要清零
-;B2_TRANSFER: JMP B2
 
 ; 定义一个标签AGAIN，用来循环
 AGAIN: MOV DX, C_PORT
@@ -105,7 +103,6 @@ AGAIN: MOV DX, C_PORT
 	TEST AL, 00000001B   ; 测试AL的第0位，即C端口的第0位，是否为1
 	JZ B1   ; 如果为1，跳转到B1中转程序，表示要暂停
 	MOV CX,6
-;B1_TRANSFER: JMP B1
 
 
 SHOWTIME: MOV DX, C_PORT
@@ -167,7 +164,6 @@ A2: MOV DAT2, 0   ; DAT2=0，满60分，对DAT2清零
 	MOV CX, 60
 	DEC CX
 	JZ BACK
-;BACK_TRANSFER: JMP BACK
 
 
 ; 定义一个标签A3，用来处理分的进位
@@ -345,7 +341,6 @@ DISPAGAIN1:
 
 	DEC DI
 	JNZ DISPAGAIN1   ; 如果DI不为0，跳转到DISPAGAIN1标签，继续显示
-;DISPAGAIN1_TRANSFER: JMP DISPAGAIN1
 	RET
 DISPLAY_DEC ENDP
 
@@ -466,35 +461,6 @@ SAVESTOP PROC
 	POP CX
 	RET
 SAVESTOP ENDP
-
-
-; 定义一个子程序SAVESTART，用来保存最近一次开始的结果，这个已经用不到了
-;SAVESTART PROC
-;	; 入栈，保护原先内容
-;	PUSH AX
-;	PUSH BX
-;	PUSH CX
-;
-;	; 保存开始时的结果
-;	MOV AL, BUF
-;	MOV AH, BUF+1
-;	MOV BL, BUF+2
-;	MOV BH, BUF+3
-;	MOV CL, BUF+4
-;	MOV CH, BUF+5
-;	MOV SAVESTART, AL
-;	MOV SAVESTART+1, AH
-;	MOV SAVESTART+2, BL
-;	MOV SAVESTART+3, BH
-;	MOV SAVESTART+4, CL
-;	MOV SAVESTART+5, CH
-;
-;	; 出栈，恢复原来的内容
-;	POP AX
-;	POP BX
-;	POP CX
-;	RET
-;SAVESTART ENDP
 
 
 ; 定义一个子程序DISPLAYTIME，计算得到最近一次计数的结果
