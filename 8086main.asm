@@ -29,7 +29,7 @@ INTR1 EQU 0306H   ; 中断1端口
 DCOUNT EQU 6   ; 数据个数为6
 
 DATA SEGMENT
-    LEDTAB DB 3FH, 06H, 5BH, 4FH, 66H, 6DH, 7DH, 07H, 7FH, 6FH, 77H, 7CH, 39H, 5EH, 79H, 71H, 77H, 7CH, 39H, 5EH, 79H, 71H   ; 数码管显示表
+    LEDTAB DB 3FH, 06H, 5BH, 4FH, 66H, 6DH, 7DH, 07H, 7FH, 6FH   ; 数码管显示表，依次对应0~9
     BUF DB 0, 0, 0, 0, 0, 0   ; 缓冲区，用来储存要显示的六位数
     BUFF DB 20 DUP(?)   ; 另一个缓冲区
     STARTBUFF DB 0, 0, 0, 0, 0, 0   ; 储存开始时间的六位数
